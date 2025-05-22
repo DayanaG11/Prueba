@@ -10,28 +10,15 @@ import java.util.List;
 @Repository
 public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
 
-    @Query("SELECT new sv.edu.catolica.NetTEAM.entities.dto.FacturaDetalleDTO(" +
-            "f.id_factura, " +          // Long
-            "f.total, " +               // Double
-            "f.fecha, " +               // Date
-            "f.pagado, " +              // Boolean
-            "m.nombre, " +              // String (nombre del medicamento)
-            "f.servicios, " +           // String (servicios de la factura)
-            "f.metodo_pago, " +         // String (método de pago de la factura)
-            "p.nombre) " +              // String (nombre del paciente, ya que no tiene apellido)
+    @Query("SELECT new sv.edu.catolica.NetTEAM.entities.dto.FacturaDetalleDTO(" + "f.id_factura, " +          // Long
+            "f.total, " + "f.fecha, " + "f.pagado, " + "m.nombre, " + "f.servicios, " + "f.metodo_pago, " + "p.nombre) " +
             "FROM FacturaEntity f, MedicamentoEntity m, PacienteEntity p " +
-            "WHERE f.medicamento = m.id_medicamento AND f.id_paciente = p.idPaciente") // Asegúrate de estos nombres de atributos
+            "WHERE f.medicamento = m.id_medicamento AND f.id_paciente = p.idPaciente")
     List<FacturaDetalleDTO> findAllFacturaDetails();
 
     @Query("SELECT new sv.edu.catolica.NetTEAM.entities.dto.FacturaDetalleDTO(" +
-            "f.id_factura, " +
-            "f.total, " +
-            "f.fecha, " +
-            "f.pagado, " +
-            "m.nombre, " +
-            "f.servicios, " +
-            "f.metodo_pago, " +
-            "p.nombre) " +
+            "f.id_factura, " + "f.total, " + "f.fecha, " + "f.pagado, " + "m.nombre, " + "f.servicios, " +
+            "f.metodo_pago, " + "p.nombre) " +
             "FROM FacturaEntity f, MedicamentoEntity m, PacienteEntity p " +
             "WHERE f.medicamento = m.id_medicamento AND f.id_paciente = p.idPaciente AND f.id_paciente = :idPaciente")
     List<FacturaDetalleDTO> findFacturaDetailsByPacienteId(int idPaciente); // Parámetro int para f.id_paciente
