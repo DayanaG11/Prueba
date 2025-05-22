@@ -1,10 +1,11 @@
 package sv.edu.catolica.NetTEAM.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import  org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sv.edu.catolica.NetTEAM.entities.FacturaEntity;
-import sv.edu.catolica.NetTEAM.repository.FacturaRepository;
-import sv.edu.catolica.NetTEAM.service.IFactura;
+import sv.edu.catolica.NetTEAM.entities.dto.FacturaDetalleDTO; // ¡Importar el DTO!
+import sv.edu.catolica.NetTEAM.repository.FacturaRepository; // Importar el repositorio
+import sv.edu.catolica.NetTEAM.service.IFactura; // Importar la interfaz de servicio
 
 
 import java.util.List;
@@ -12,8 +13,13 @@ import java.util.List;
 @Service
 public class FacturaImpl implements IFactura {
 
-    @Autowired
+
     private FacturaRepository facturaRepository;
+
+    @Autowired
+    public FacturaImpl(FacturaRepository facturaRepository) {
+        this.facturaRepository = facturaRepository;
+    }
 
     @Override
     public List<FacturaEntity> findAll() {
@@ -23,5 +29,16 @@ public class FacturaImpl implements IFactura {
     @Override
     public FacturaEntity save(FacturaEntity factura){
         return facturaRepository.save(factura);
+    }
+    @Override
+    public List<FacturaDetalleDTO> findAllFacturaDetails() {
+
+        return facturaRepository.findAllFacturaDetails();
+    }
+
+    @Override
+    public List<FacturaDetalleDTO> findFacturaDetailsByPacienteId(int idPaciente) {
+
+        return facturaRepository.findFacturaDetailsByPacienteId(idPaciente);
     }
 }

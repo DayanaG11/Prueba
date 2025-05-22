@@ -32,7 +32,7 @@ public class Historial_MedicoController {
        return iHistorial_medico.findAll();
     }*/
 
-    @Transactional //nicia una transacción al comenzar el metodo
+    @Transactional //inicia una transacción al comenzar el metodo
     @PostMapping("/historial_medico")
     public Historial_MedicoEntity save(@RequestBody Historial_MedicoEntity historial_medico){
         return iHistorial_medico.save(historial_medico);
