@@ -21,6 +21,11 @@ public class PacienteController {
         return iPaciente.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/paciente/por-nombre")
+    public List<PacienteEntity> getPacientesByNombre(@RequestParam String nombre) {
+        return iPaciente.findByNombreContaining(nombre);
+    }
 
     @Transactional
     @PostMapping("/paciente")
