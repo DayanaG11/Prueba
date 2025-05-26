@@ -24,4 +24,9 @@ public class PacienteImpl implements IPaciente{
         return pacienteRepository.save(paciente);
     }
 
+     @Override
+    public List<PacienteEntity> findByNombreContaining(String nombre) {
+        return pacienteRepository.findByNombreContaining(nombre);
+    }
+
 }
