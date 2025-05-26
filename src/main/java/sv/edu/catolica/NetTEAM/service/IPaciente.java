@@ -9,5 +9,7 @@ public interface IPaciente {
     List<PacienteEntity> findAll();
 
     PacienteEntity save(PacienteEntity paciente);
+    
+    List<PacienteEntity> findByNombreContaining(String nombre);
 }
 
