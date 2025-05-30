@@ -38,8 +38,14 @@ public class PacienteController {
         return iPaciente.findAll();
     }
 
+    //Obtener paciente por nombre especifico
+    @Transactional(readOnly = true)
+    @GetMapping("/paciente/por-nombre")
+    public List<PacienteEntity> getPacientesByNombre(@RequestParam String nombre) {
+        return iPaciente.findByNombreContaining(nombre);
+    }
 
-
+    
 //POST
     @Transactional
     @PostMapping("/paciente")
