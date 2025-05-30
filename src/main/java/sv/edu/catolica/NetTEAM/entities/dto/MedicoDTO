@@ -1,4 +1,4 @@
-package com.tu.paquete.dto;
+package sv.edu.catolica.NetTEAM.entities.dto;
 
 public class MedicoDTO {
 
