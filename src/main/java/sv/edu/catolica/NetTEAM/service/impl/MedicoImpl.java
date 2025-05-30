@@ -23,4 +23,9 @@ public class MedicoImpl implements IMedico {
     public MedicoEntity save(MedicoEntity medico){
         return medicoRepository.save(medico);
     }
+
+    @Override
+    public List<MedicoEntity> findByNombreContaining(String nombre) {
+        return medicoRepository.findByNombreContaining(nombre);
+    }
 }
