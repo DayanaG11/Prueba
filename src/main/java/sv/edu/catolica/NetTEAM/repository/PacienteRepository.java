@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface PacienteRepository extends JpaRepository <PacienteEntity,Long >{
-    @Query("SELECT p  FROM PacienteEntity p WHERE p.nombre < :nombre" )
-    List<PacienteEntity> findByNombre(@Param("nombre")  String nombre);
+    @Query("SELECT p  FROM PacienteEntity p WHERE p.nombre LIKE %:nombre %" )
+    List<PacienteEntity> findByNombreContaing(@Param("nombre")  String nombre);
 }
