@@ -23,6 +23,12 @@ public class MedicoController {
         return iMedico.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/medico/por-nombre")
+    public List<MedicoEntity> getMedicosByNombre(@RequestParam String nombre) {
+        return iMedico.findByNombreContaining(nombre);
+    }
+
     @Transactional
     @PostMapping("/medico")
     public MedicoEntity save(@RequestBody MedicoEntity medico){
