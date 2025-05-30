@@ -9,4 +9,6 @@ public interface IMedico {
     List<MedicoEntity> findAll();
 
     MedicoEntity save(MedicoEntity medico);
+
+    List<MedicoEntity> findByNombreContaining(String nombre);
 }
