@@ -10,4 +10,6 @@ public interface IMedicamento {
     List<MedicamentoEntity> findAll();
 
     MedicamentoEntity save(MedicamentoEntity medicamento);
+
+    void delete(Long id);
 }
