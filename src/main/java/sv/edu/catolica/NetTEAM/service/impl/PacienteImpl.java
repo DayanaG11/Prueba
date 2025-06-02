@@ -33,4 +33,11 @@ public class PacienteImpl implements IPaciente{
         return pacienteRepository.findByNombreContaining(nombre);
     }
 
+    @Override
+    public void delete(Long id) {
+        pacienteRepository.deleteById(id);
+    }
+
+
+
 }
