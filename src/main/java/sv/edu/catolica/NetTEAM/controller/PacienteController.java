@@ -53,6 +53,23 @@ public class PacienteController {
         return iPaciente.save(paciente);
     }
 
+    @PutMapping("/paciente/{id}")
+    public ResponseEntity<PacienteEntity> update(@PathVariable Long id, @RequestBody PacienteEntity paciente) {
+        PacienteEntity existente = iPaciente.findById(id);
+        if (existente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualiza los campos necesarios
+        existente.setNombre(paciente.getNombre());
+        existente.setEdad(paciente.getEdad());
+        existente.setDireccion(paciente.getDireccion());
+        existente.setTelefono(paciente.getTelefono());
+
+        PacienteEntity actualizado = iPaciente.save(existente);
+        return ResponseEntity.ok(actualizado);
+    }
+
  //DELETE
     @DeleteMapping("/paciente/{id}")
     public void delete(@PathVariable Long id) {
