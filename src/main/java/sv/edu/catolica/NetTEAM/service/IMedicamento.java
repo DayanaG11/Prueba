@@ -11,5 +11,7 @@ public interface IMedicamento {
 
     MedicamentoEntity save(MedicamentoEntity medicamento);
 
+    MedicamentoEntity findById(Long id);
+
     void delete(Long id);
 }
