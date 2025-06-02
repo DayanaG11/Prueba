@@ -12,5 +12,7 @@ public interface IMedico {
 
     List<MedicoEntity> findByNombreContaining(String nombre);
 
+    MedicoEntity findById(Long id);
+
     void delete(Long id);
 }
