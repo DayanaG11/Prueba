@@ -13,5 +13,7 @@ public interface IPaciente {
     List<PacienteEntity> findByNombreContaining(String nombre);
 
      void delete(Long id);
+
+    PacienteEntity findById(Long id);
 }
 
