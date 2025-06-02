@@ -11,4 +11,6 @@ public interface IMedico {
     MedicoEntity save(MedicoEntity medico);
 
     List<MedicoEntity> findByNombreContaining(String nombre);
+
+    void delete(Long id);
 }
