@@ -28,5 +28,10 @@ public class MedicamentoImpl implements IMedicamento {
         return medicamentoRepository.save(medicamento);
     }
 
+    @Override
+    public void delete(Long id) {
+        medicamentoRepository.deleteById(id);
+    }
+
 
 }
