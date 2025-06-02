@@ -35,4 +35,9 @@ public class MedicoController {
         return iMedico.save(medico);
     }
 
+    @DeleteMapping("/medicamento/{id}")
+    public void delete(@PathVariable Long id) {
+        iMedicamento.delete(id);
+    }
+
 }
