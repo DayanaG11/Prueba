@@ -28,4 +28,9 @@ public class MedicoImpl implements IMedico {
     public List<MedicoEntity> findByNombreContaining(String nombre) {
         return medicoRepository.findByNombreContaining(nombre);
     }
+
+    @Override
+    public void delete(Long id) {
+        medicamentoRepository.deleteById(id);
+    }
 }
