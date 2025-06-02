@@ -8,4 +8,7 @@ import sv.edu.catolica.NetTEAM.entities.MedicoEntity;
 @Repository
 public interface MedicamentoRepository extends JpaRepository<MedicamentoEntity,Long> {
 
+  @Query("SELECT p FROM MedicamentoEntity p WHERE p.nombre LIKE %:nombre%")
+    List<MedicamentoEntity> findByNombreContaining(@Param("nombre") String nombre);
+
 }
