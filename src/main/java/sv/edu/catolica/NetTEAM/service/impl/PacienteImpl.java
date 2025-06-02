@@ -33,10 +33,17 @@ public class PacienteImpl implements IPaciente{
         return pacienteRepository.findByNombreContaining(nombre);
     }
 
+    
+    @Override
+    public PacienteEntity findById(Long id) {
+        return pacienteRepository.findById(id).orElse(null);
+    }
+
     @Override
     public void delete(Long id) {
         pacienteRepository.deleteById(id);
     }
+    
 
 
 
