@@ -23,6 +23,12 @@ public class MedicamentoController {
         return iMedicamento.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/medicamento/por-nombre")
+    public List<MedicamentoEntity> getMedicamentosByNombre(@RequestParam String nombre) {
+        return iMedicamento.findByNombreContaining(nombre);
+    }
+
     @Transactional
     @PostMapping("/medicamento")
     public MedicamentoEntity save(@RequestBody MedicamentoEntity medicamento){
