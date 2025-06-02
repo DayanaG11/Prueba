@@ -29,6 +29,23 @@ public class MedicamentoController {
         return iMedicamento.save(medicamento);
     }
 
+    @PutMapping("/medicamento/{id}")
+    public ResponseEntity<MedicamentoEntity> update(@PathVariable Long id, @RequestBody MedicamentoEntity medicamento) {
+        MedicamentoEntity existente = iMedicamento.findById(id);
+        if (existente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualiza los campos necesarios
+        existente.setNombre(medicamento.getNombre());
+        existente.setDescripcion(medicamento.getDescripcion());
+        existente.setDosis(medicamento.getDosis());
+        existente.setEfectos_secundarios(medicamento.getEfectos_secundarios());
+
+        MedicamentoEntity actualizado = iMedicamento.save(existente);
+        return ResponseEntity.ok(actualizado);
+    }
+
     @DeleteMapping("/medicamento/{id}")
     public void delete(@PathVariable Long id) {
         iMedicamento.delete(id);
