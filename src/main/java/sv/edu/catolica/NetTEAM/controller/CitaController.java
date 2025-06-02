@@ -54,4 +54,9 @@ public class CitaController {
         return iCita.save(cita_medica);
     }
 
+    @DeleteMapping("/cita_medica/{id}")
+    public void delete(@PathVariable Long id) {
+        iCita.delete(id);
+    }
+
 }
