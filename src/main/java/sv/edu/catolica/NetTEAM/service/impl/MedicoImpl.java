@@ -31,6 +31,6 @@ public class MedicoImpl implements IMedico {
 
     @Override
     public void delete(Long id) {
-        medicamentoRepository.deleteById(id);
+        medicoRepository.deleteById(id);
     }
 }
