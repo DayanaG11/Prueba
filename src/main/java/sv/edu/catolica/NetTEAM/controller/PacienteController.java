@@ -53,4 +53,10 @@ public class PacienteController {
         return iPaciente.save(paciente);
     }
 
+ //DELETE
+    @DeleteMapping("/paciente/{id}")
+    public void delete(@PathVariable Long id) {
+        iPaciente.delete(id);
+    }
+
 }
