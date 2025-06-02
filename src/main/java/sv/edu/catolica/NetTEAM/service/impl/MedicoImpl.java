@@ -30,6 +30,11 @@ public class MedicoImpl implements IMedico {
     }
 
     @Override
+    public MedicoEntity findById(Long id) {
+        return medicoRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void delete(Long id) {
         medicoRepository.deleteById(id);
     }
