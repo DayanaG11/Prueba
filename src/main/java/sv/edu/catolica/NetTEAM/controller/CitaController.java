@@ -54,6 +54,22 @@ public class CitaController {
         return iCita.save(cita_medica);
     }
 
+    @PutMapping("/cita_medica/{id}")
+    public ResponseEntity<CitaEntity> update(@PathVariable Long id, @RequestBody CitaEntity cita_medica) {
+        CitaEntity existente = iCita.findById(id);
+        if (existente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualiza los campos necesarios
+        existente.setFecha(cita_medica.getFecha());
+        existente.setMotivo(cita_medica.getMotivo());
+        existente.setEstado(cita_medica.getEstado());
+
+        CitaEntity actualizado = iCita.save(existente);
+        return ResponseEntity.ok(actualizado);
+    }
+
     @DeleteMapping("/cita_medica/{id}")
     public void delete(@PathVariable Long id) {
         iCita.delete(id);
