@@ -12,6 +12,11 @@ public interface IFactura {
 
     FacturaEntity save(FacturaEntity factura);
 
+    void deleteById(Long id);
+
    List<FacturaDetalleDTO> findAllFacturaDetails();
     List<FacturaDetalleDTO> findFacturaDetailsByPacienteId(int idPaciente);
+
+    Optional<FacturaEntity> findById(Long id);
+
 }

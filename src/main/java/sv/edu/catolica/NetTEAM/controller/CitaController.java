@@ -23,11 +23,12 @@ public class CitaController {
     @Autowired
     private ICita iCita;
 
-    /*@Transactional(readOnly = true)
+//GET--Obtener datos
+    @Transactional(readOnly = true)
     @GetMapping("/cita_medica")
     public List<CitaEntity> findAll() {
         return iCita.findAll();
-    }*/
+    }
 
     @Transactional(readOnly = true)
     @GetMapping(value = "/citas/details", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,12 +50,15 @@ public class CitaController {
     }
 
 
+//POST--Agregar datos
     @Transactional
     @PostMapping("/cita_medica")
     public CitaEntity save(@RequestBody CitaEntity cita_medica){
         return iCita.save(cita_medica);
     }
 
+
+//PUT--Actualiza datos que ya estan
     @PutMapping("/cita_medica/{id}")
     public ResponseEntity<CitaEntity> update(@PathVariable Long id, @RequestBody CitaEntity cita_medica) {
         Optional<CitaEntity> existente = iCita.findById(id);

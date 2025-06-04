@@ -6,6 +6,7 @@ import org.springframework.http.MediaType; // Importar MediaType
 import org.springframework.http.ResponseEntity; // Importar ResponseEntity
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*; // Importar todas las anotaciones de Web
+import sv.edu.catolica.NetTEAM.entities.CitaEntity;
 import sv.edu.catolica.NetTEAM.entities.FacturaEntity;
 // import sv.edu.catolica.NetTEAM.entities.MedicoEntity; // Si no usas MedicoEntity, puedes quitar este import
 import sv.edu.catolica.NetTEAM.entities.dto.FacturaDetalleDTO; // Importar tu DTO
@@ -13,6 +14,7 @@ import sv.edu.catolica.NetTEAM.controller.response.MessageResponse; // Importar 
 import sv.edu.catolica.NetTEAM.service.IFactura;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/process")
@@ -22,11 +24,12 @@ public class FacturaController {
     private IFactura iFactura;
 
 
+//Get--muestra los datos de la factura
 
-    @Transactional
-    @PostMapping("/factura")
-    public FacturaEntity save(@RequestBody FacturaEntity factura){
-        return iFactura.save(factura);
+    @Transactional(readOnly = true)
+    @GetMapping("/factura")
+    public List<FacturaEntity> findAll() {
+        return iFactura.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -50,10 +53,10 @@ public class FacturaController {
         }
     }
 
-    // Endpoint para obtener detalles de facturas por ID de paciente
+    //obtener detalles de facturas por ID de paciente
     @Transactional(readOnly = true)
     @GetMapping(value = "/factura/details/paciente/{idPaciente}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageResponse> getFacturaDetailsByPacienteId(@PathVariable int idPaciente) { // Asegúrate de que idPaciente sea 'int' o 'Long' según tu entidad y DB
+    public ResponseEntity<MessageResponse> getFacturaDetailsByPacienteId(@PathVariable int idPaciente) {
         try {
             List<FacturaDetalleDTO> facturaDetails = iFactura.findFacturaDetailsByPacienteId(idPaciente);
 
@@ -79,4 +82,39 @@ public class FacturaController {
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+//Post--agrega datos
+    @Transactional
+    @PostMapping("/factura")
+    public FacturaEntity save(@RequestBody FacturaEntity factura){
+        return iFactura.save(factura);
+    }
+
+    //PUT--Actualiza datos que ya estan
+    @PutMapping("/factura/{id}")
+    public ResponseEntity<FacturaEntity> update(@PathVariable Long id, @RequestBody FacturaEntity factura) {
+        Optional<FacturaEntity> existente = iFactura.findById(id);
+        if (existente.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualiza los campos necesarios
+        existente.get().setTotal(factura.getTotal());
+        existente.get().setFecha(factura.getFecha());
+        existente.get().setPagado(factura.getPagado());
+        existente.get().setMedicamento(factura.getMedicamento());
+        existente.get().setServicios(factura.getServicios());
+        existente.get().setMetodo_pago(factura.getMetodo_pago());
+        existente.get().setId_paciente(factura.getId_paciente());
+
+        FacturaEntity actualizado = iFactura.save(existente.orElse(null));
+        return ResponseEntity.ok(actualizado);
+    }
+
+
+//Elimina datos
+    @DeleteMapping("/factura/{id}")
+    public void delete(@PathVariable Long id) {
+        iFactura.deleteById(id);
+    }
+
 }

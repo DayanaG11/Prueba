@@ -32,11 +32,6 @@ public class PacienteController {
     }
 
 
-    @Transactional(readOnly = true)
-    @GetMapping("/paciente")
-    public List<PacienteEntity> findAll() {
-        return iPaciente.findAll();
-    }
 
     //Obtener paciente por nombre especifico
     @Transactional(readOnly = true)
@@ -53,6 +48,8 @@ public class PacienteController {
         return iPaciente.save(paciente);
     }
 
+
+//PUT
     @PutMapping("/paciente/{id}")
     public ResponseEntity<PacienteEntity> update(@PathVariable Long id, @RequestBody PacienteEntity paciente) {
         PacienteEntity existente = iPaciente.findById(id);

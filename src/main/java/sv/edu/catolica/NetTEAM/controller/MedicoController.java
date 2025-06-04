@@ -30,12 +30,14 @@ public class MedicoController {
     public List<MedicoEntity> getMedicosByNombre(@RequestParam String nombre) {
         return iMedico.findByNombreContaining(nombre);
     }
-
+//POST--Crea nuevos datos
     @Transactional
     @PostMapping("/medico")
     public MedicoEntity save(@RequestBody MedicoEntity medico){
         return iMedico.save(medico);
     }
+
+//PUT--Actualiza datos ya existentes
     @PutMapping("/medico/{id}")
     public ResponseEntity<MedicoEntity> update(@PathVariable Long id, @RequestBody MedicoEntity medico) {
         MedicoEntity existente = iMedico.findById(id);
@@ -51,7 +53,7 @@ public class MedicoController {
         MedicoEntity actualizado = iMedico.save(existente);
         return ResponseEntity.ok(actualizado);
     }
-
+//DELETE--Elimina datos
     @DeleteMapping("/medico/{id}")
     public void delete(@PathVariable Long id) {
         iMedico.delete(id);
