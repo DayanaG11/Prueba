@@ -1,14 +1,16 @@
 package sv.edu.catolica.NetTEAM.controller;
 
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.catolica.NetTEAM.entities.MedicoEntity;
 import sv.edu.catolica.NetTEAM.service.IMedico;
 
 import java.util.List;
-
+@Data
 @RestController
 @RequestMapping("/process")
 
@@ -42,9 +44,9 @@ public class MedicoController {
         }
 
         // Actualiza los campos necesarios
-        existente.setNombre(medico.getNombre());
+        existente.setNombre_medico(medico.getNombre_medico());
         existente.setEspecialidad(medico.getEspecialidad());
-        existente.setTelefono(medico.getTelefono());
+        existente.setTelefono_medico(medico.getTelefono());
 
         MedicoEntity actualizado = iMedico.save(existente);
         return ResponseEntity.ok(actualizado);
