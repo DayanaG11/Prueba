@@ -26,11 +26,11 @@ public class Historial_MedicoController {
     }
 
 
-    /*@Transactional(readOnly = true)//nicia una transacción al comenzar el metodo, solo permite lectura
+    @Transactional(readOnly = true)//nicia una transacción al comenzar el metodo, solo permite lectura
     @GetMapping("/historial_medico")
     public List<Historial_MedicoEntity> findAll() {
        return iHistorial_medico.findAll();
-    }*/
+    }
 
     @Transactional //inicia una transacción al comenzar el metodo
     @PostMapping("/historial_medico")
