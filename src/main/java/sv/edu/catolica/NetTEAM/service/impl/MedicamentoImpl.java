@@ -28,5 +28,20 @@ public class MedicamentoImpl implements IMedicamento {
         return medicamentoRepository.save(medicamento);
     }
 
+    @Override
+    public List<MedicamentoEntity> findByNombreContaining(String nombre) {
+        return medicamentoRepository.findByNombreContaining(nombre);
+    }
+
+     @Override
+    public MedicamentoEntity findById(Long id) {
+        return medicamentoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        medicamentoRepository.deleteById(id);
+    }
+
 
 }

@@ -1,12 +1,9 @@
 package sv.edu.catolica.NetTEAM.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,43 +28,4 @@ public class MedicamentoEntity {
     private String efectos_secundarios;
 
 
-    public Long getId_medicamento() {
-        return id_medicamento;
-    }
-
-    public void setId_medicamento(Long id_medicamento) {
-        this.id_medicamento = id_medicamento;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getDosis() {
-        return dosis;
-    }
-
-    public void setDosis(String dosis) {
-        this.dosis = dosis;
-    }
-
-    public String getEfectos_secundarios() {
-        return efectos_secundarios;
-    }
-
-    public void setEfectos_secundarios(String efectos_secundarios) {
-        this.efectos_secundarios = efectos_secundarios;
-    }
 }

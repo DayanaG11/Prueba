@@ -1,5 +1,6 @@
 package sv.edu.catolica.NetTEAM.service.impl;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sv.edu.catolica.NetTEAM.entities.PacienteEntity;
@@ -7,12 +8,15 @@ import sv.edu.catolica.NetTEAM.repository.PacienteRepository;
 import sv.edu.catolica.NetTEAM.service.IPaciente;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PacienteImpl implements IPaciente{
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+
 
     @Override
     public List<PacienteEntity> findAll() {
@@ -23,5 +27,24 @@ public class PacienteImpl implements IPaciente{
     public PacienteEntity save(PacienteEntity paciente){
         return pacienteRepository.save(paciente);
     }
+
+    @Override
+    public List<PacienteEntity> findByNombreContaining(String nombre) {
+        return pacienteRepository.findByNombreContaining(nombre);
+    }
+
+    
+    @Override
+    public PacienteEntity findById(Long id) {
+        return pacienteRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        pacienteRepository.deleteById(id);
+    }
+    
+
+
 
 }

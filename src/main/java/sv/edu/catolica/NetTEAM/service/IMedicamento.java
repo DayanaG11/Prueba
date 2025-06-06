@@ -10,4 +10,10 @@ public interface IMedicamento {
     List<MedicamentoEntity> findAll();
 
     MedicamentoEntity save(MedicamentoEntity medicamento);
+    
+    List<MedicamentoEntity> findByNombreContaining(String nombre);
+
+    MedicamentoEntity findById(Long id);
+
+    void delete(Long id);
 }

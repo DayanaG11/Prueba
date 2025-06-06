@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.DateTimeException;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,35 +27,10 @@ public class CitaEntity {
     @Column(columnDefinition = "VARCHAR(45)")
     private String estado;
 
-    public Long getIdcita_medica() {
-        return idcita_medica;
-    }
+    @Column(columnDefinition = "INT")
+    private int id_paciente;
 
-    public void setIdcita_medica(Long idcita_medica) {
-        this.idcita_medica = idcita_medica;
-    }
+    @Column(columnDefinition = "INT")
+    private int id_medico;
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }

@@ -1,14 +1,16 @@
 package sv.edu.catolica.NetTEAM.controller;
 
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import sv.edu.catolica.NetTEAM.entities.MedicoEntity;
 import sv.edu.catolica.NetTEAM.service.IMedico;
 
 import java.util.List;
-
+@Data
 @RestController
 @RequestMapping("/process")
 
@@ -23,10 +25,38 @@ public class MedicoController {
         return iMedico.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/medico/por-nombre")
+    public List<MedicoEntity> getMedicosByNombre(@RequestParam String nombre) {
+        return iMedico.findByNombreContaining(nombre);
+    }
+//POST--Crea nuevos datos
     @Transactional
     @PostMapping("/medico")
     public MedicoEntity save(@RequestBody MedicoEntity medico){
         return iMedico.save(medico);
+    }
+
+//PUT--Actualiza datos ya existentes
+    @PutMapping("/medico/{id}")
+    public ResponseEntity<MedicoEntity> update(@PathVariable Long id, @RequestBody MedicoEntity medico) {
+        MedicoEntity existente = iMedico.findById(id);
+        if (existente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualiza los campos necesarios
+        existente.setNombre_medico(medico.getNombre_medico());
+        existente.setEspecialidad(medico.getEspecialidad());
+        existente.setTelefono_medico(medico.getTelefono());
+
+        MedicoEntity actualizado = iMedico.save(existente);
+        return ResponseEntity.ok(actualizado);
+    }
+//DELETE--Elimina datos
+    @DeleteMapping("/medico/{id}")
+    public void delete(@PathVariable Long id) {
+        iMedico.delete(id);
     }
 
 }
